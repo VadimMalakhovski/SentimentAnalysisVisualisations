@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/main.css">
+        {% block head %}
+        <title>{% block title %} Title!{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        <br>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <!-- Example single danger button -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Individual Graphs
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/">Summary Graph</a>
+                            <a class="dropdown-item" href="/temporal_graph">Temporal Graph</a>
+                            <a class="dropdown-item" href="/spatial_graph">Spatial Graph</a>
+                            <a class="dropdown-item" href="/word_cloud">Word Cloud</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br>
+        <h3></h3>
+        <!--<h4>On the main page add screens of all images and explain navigation</h4>-->
+        {% for p in paragraph %}
+        <p>{{ p }}</p>
+        {% endfor %}
+        <div class="container-fluid">
+            {% if pageType == 'summary_graph' %}
+            <h5 class="display-5">Summary Graph</h5>
+            <p class="lead">
+                The purpose of this graph is to summarise visualisations
+            </p>
+            <p class="lead">
+                However, some data was reduced in order to keep the representations clean. Please select individual graphs from the red button on top
+            </p>
+            <p class="lead">
+                The pie chart has almost equal amount of the 3 types of sentiment tweets in order to avoid biases when training the AI model
+            </p>
+            {% elif pageType == 'temporal_graph' %}
+            <h5 class="display-5">Temporal Graph</h5>
+            <p class="lead">
+                The purpose of this graph is to display the time of day influence on human mood
+            </p>
+            <p class="lead">
+                It looks like the positive comments tend to be more in the evening while negative at around noon and neutral are evenly spread across the day
+            </p>
+            {% elif pageType == 'spatial_graph' %}
+            <h5 class="display-5">Spatial Graph</h5>
+            <p class="lead">
+                The purpose of this bubble chart is to display the largest retweeted tweets of top 10 tweets per continent
+            </p>
+            <p class="lead">
+                Hover over the chart to see the actual retweets and enlarge with the dropdown on the right of the screen
+            </p>
+            {% elif pageType == 'word_cloud' %}
+            <h5 class="display-5">Word Cloud</h5>
+            <p class="lead">
+                The reliability scores were not available so, instead, this page displays the frequency of words used in all the tweets
+            </p>
+            {% else %}
+            <br><br>
+            {% endif %}
+        </div>
+        <div id={{ chartID|safe }} class="chart" style="..."></div>
+        <script>
+            var chart_id = {{ chartID|safe }}
+            var series = {{ series|safe }}
+            var labels = {{ labels|safe }}
+            var title = {{ title|safe }}
+            var xAxis = {{ xAxis|safe }}
+            var yAxis = {{ yAxis|safe }}
+            var chart = {{ chart|safe }}
+        </script>
+        <div id={{ chart2ID|safe }} class="chart" style="..."></div>
+        <script>
+            var chart2_id = {{ chart2ID|safe }}
+            var series2 = {{ series2|safe }}
+            var title2 = {{ title2|safe }}
+            var xAxis2 = {{ xAxis2|safe }}
+            var yAxis2 = {{ yAxis2|safe }}
+            var chart2 = {{ chart2|safe }}
+            var labels2 = {{ labels2|safe }}
+            var colorAxis2 = {{ colorAxis2|safe }}
+        </script>
+        <div id={{ chart3ID|safe }} class="chart3"></div>
+        <script>
+            var chart3_id = {{ chart3ID|safe }}
+            var series3 = {{ series3|safe }}
+            var title3 = {{ title3|safe }}
+            var xAxis3 = {{ xAxis3|safe }}
+            var yAxis3 = {{ yAxis3|safe }}
+            var chart3 = {{ chart3|safe }}
+            var labels3 = {{ labels3|safe }}
+            var plotOptions3 = {{ plotOptions3|safe }}
+        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+        <script src="../static/graph.js"></script>
+    </body>
+    <!-- <script type="text/javascript" src="../static/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</html>
