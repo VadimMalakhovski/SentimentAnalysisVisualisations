@@ -37,6 +37,7 @@ def clean_and_format_tweets(tweet, is_vader=False):
         # Remove stopwords
         tweet_tokens = word_tokenize(tweet)
         filtered_words = [w for w in tweet_tokens if not w in stop_words]
+        # chose either stemming or lemmatizing, do not use both
         # stemming
         porter_streamer = PorterStemmer()
         stemmed_words = [porter_streamer.stem(w) for w in filtered_words]
