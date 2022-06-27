@@ -57,7 +57,7 @@ def vectorization(x_data):
 my_dataset = pd.read_csv("tweets_data/tweets_annotated_compiled.csv", encoding='latin-1')
 
 # Shuffle with pandas with their version of seed
-# SHUFFLING IS SUCH A WAY TO MAKE SURE THAT MY ANNOTATED DATA IS IN TRAINING DS AS MY DS IS THE FIRST 212 ROWS SO THAT
+# SHUFFLING IN SUCH A WAY TO MAKE SURE THAT MY ANNOTATED DATA IS IN TRAINING DS AS MY DS IS THE FIRST 212 ROWS SO THAT
 # THE MODELS WILL BE TESTED AGAINST DIFFERENT DOMAINS
 my_dataset = pd.concat([my_dataset[:213],my_dataset[1:].sample(frac=1, random_state=0)]).reset_index(drop=True)
 
