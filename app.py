@@ -38,7 +38,7 @@ for row in results_table:
 df = pd.read_csv("tweets_data/tweets_annotated_compiled.csv")
 
 # Continents
-# add total sentiment tweets per country in this order 'EUR', 'NAM', 'AUS', 'ASI', 'SAM'
+# add total sentiment tweets per continent in this order 'EUR', 'NAM', 'AUS', 'ASI', 'SAM'
 # sentiment lists with continents
 negative_tweets_per_continent_list, neutral_tweets_per_continent_list, positive_tweets_per_continent_list = [], [], []
 average_tweets_per_continent_list = []
@@ -172,7 +172,7 @@ def calculate_reach(continent_code):
     reach_df = df.loc[df['Continent_Code'] == continent_code, 'Reach']
     reach_list = reach_df.tolist()
     reach_list.sort()
-    # get top n influence's so that chart will be clearer and load fastr
+    # get top n influence's so that chart will be clearer and load faster
     top_n_reach_list = reach_list[-10:]
     return top_n_reach_list
 
